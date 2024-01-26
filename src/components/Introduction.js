@@ -19,6 +19,7 @@ const IntroImage = styled.img`
 const TextContainer = styled.div`
   flex: 1; /* Take remaining width */
   padding-left: 20px; /* Add space between the image and the text */
+  padding-right:100px;
   //text-align: left; /* Align text to the left */
   text-align: justify; /* Align text to justify */
 
@@ -27,7 +28,7 @@ const Separator = styled.hr`
   width: 50%; /* Adjust the width of the line */
   margin: 20px auto; /* Center the line horizontally and add space */
   border: none;
-  border-top: 5px solid #ddd; /* Set the line color and style */
+  border-top: 5px solid  #77dd77; /* Set the line color and style */
 `;
 const Introduction = () => {
   return (
