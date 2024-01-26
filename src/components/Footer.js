@@ -1,17 +1,17 @@
-// Footer.js
 import React from "react";
 import styled from "styled-components";
 
 const FooterContainer = styled.footer`
-  background-color: ${props => props.theme.darkGreen};
-  padding: 10px;
-  text-align: center;
+background-color: #f8f8f8;
+padding: 10px;
+text-align: center;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add simple shadow */
 `;
 
 const Footer = () => {
   return (
     <FooterContainer>
-      <p>&copy; 2024 My Green Website. All rights reserved.</p>
+      <p>&copy; 2024 Discover Bekaa. All rights reserved.</p>
     </FooterContainer>
   );
 };
