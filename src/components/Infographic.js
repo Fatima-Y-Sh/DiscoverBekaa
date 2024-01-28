@@ -20,39 +20,59 @@ import ay2 from '../images/ay2.jpeg';
 
 
 const InfographicContainer = styled.section`
-  display: flex;
-  margin: 20px;
+display: flex;
+flex-direction: column;
+align-items: center;
+margin: 20px;
+text-align: center;
+
+@media screen and (min-width: 500px) {
+  flex-direction: row;
+}
 `;
 
 const Carousel = styled.div`
-  width: 30%;
+width: 100%;
+max-width: 300px; /* Limit the width for better display on small screens */
+
+@media screen and (min-width: 500px) {
+  width: 30%; /* Adjust width for larger screens */
+  max-width: none; /* Remove max-width for larger screens */
+}
 `;
 
 const Element = styled.div`
-  cursor: pointer;
-  padding: 10px;
-  border: 1px solid #ddd;
-  margin-bottom: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: ${(props) => (props.isSelected ? props.theme.darkGreen : "transparent")};
-  color: ${(props) => (props.isSelected ? "white" : "black")};
-  transition: background-color 0.3s ease;
-  &:hover {
-    background-color: #f0f0f0;
-  }
+cursor: pointer;
+padding: 10px;
+border: 1px solid #ddd;
+margin-bottom: 10px;
+display: flex;
+flex-direction: column;
+align-items: center;
+background-color: ${(props) => (props.isSelected ? props.theme.darkGreen : "transparent")};
+color: ${(props) => (props.isSelected ? "white" : "black")};
+transition: background-color 0.3s ease;
+
+&:hover {
+  background-color: #f0f0f0;
+}
 `;
 
 const ElementImage = styled.img`
-  width: 200px;
-  margin-bottom: 10px;
+width: 100%;
+max-width: 250px; /* Limit the width of the image */
+margin-bottom: 10px;
 `;
 
 const Content = styled.div`
 display:flex;
   flex: 1;
   padding: 20px;
+  @media screen and (max-width: 500px) {
+    flex-direction: column;
+    align-items: center; /* Center images horizontally */
+    padding:0;
+  }
 `;
 
 const MainImageContainer = styled.div`
@@ -71,6 +91,14 @@ const SideImagesContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 20%;
+  display: flex;
+  flex-direction: column; /* Stack images vertically */
+  align-items: center; /* Center images horizontally */
+  margin-top: 10px; /* Add margin between images */
+  @media screen and (max-width: 500px) {
+    width: 70%;
+  }
+  
 `;
 
 const SideImageContainer = styled.div`
@@ -80,7 +108,7 @@ const SideImageContainer = styled.div`
 `;
 
 const SideImage = styled.img`
-  width: 100%;
+  max-width: 100%;
   height: 250px;
   border-radius: 10px;
 `;
@@ -119,6 +147,7 @@ const MainImageCaption = styled.div`
 const MainTextContainer = styled.div`
   width: 80%;
   margin-right: 20px;
+
 `;
 
 const MainText = styled.p`
@@ -126,16 +155,25 @@ const MainText = styled.p`
   color: #333;
   text-align: justify;
   white-space: pre-line;
+  @media screen and (max-width: 500px) {
+    font-size:15px;
+  }
 `;
 
 const RachayaContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 20px;
+  @media screen and (max-width: 500px) {
+    display:flex;
+    flex-direction: column;
+    align-items: center; /* Center images horizontally */
+  }
 `;
 
 const RachayaImageContainer = styled.div`
   position: relative;
+
 `;
 
 const RachayaImage = styled.img`
@@ -147,6 +185,11 @@ const RachayaImage = styled.img`
 const TempleContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  @media screen and (max-width: 500px) {
+    display:flex;
+    flex-direction: column;
+    align-items: center; /* Center images horizontally */
+  }
 `;
 
 const TempleImage = styled.img`
@@ -158,20 +201,18 @@ const TempleImage = styled.img`
 const ImagesContainer = styled.div`
   width: 50%;
   margin-right: 20px;
+  @media screen and (max-width: 500px) {
+width:100%;
+  }
 `;
 
 const ContentContainer = styled.div`
-  flex: 1;
+width: 100%;
 
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
 `;
 
 
 const Infographic = () => {
-  const [selectedElement, setSelectedElement] = useState(null);
-
   const elements = [
     {
       id: 1,
@@ -224,9 +265,14 @@ const Infographic = () => {
         ],
     },
   ];
+  const [selectedElement, setSelectedElement] = useState(elements[0]);
+
+
 
   const handleElementClick = (element) => {
     setSelectedElement(element);
+    document.getElementById("contentContainer").scrollIntoView({ behavior: "smooth" });
+
   };
 
   const renderContent = () => {
@@ -255,7 +301,7 @@ const Infographic = () => {
         );
       case "Anjar":
         return (
-          <div style={{marginTop:'50%'}}>
+          <div >
                         <p  style={{fontSize: "30px",paddingLeft:'20px'}}>{selectedElement.text}</p>
             <Content>
               <MainTextContainer>
@@ -273,7 +319,7 @@ const Infographic = () => {
         );
       case "Rachaya Al Wadi":
         return (
-          <div style={{marginTop:'85%'}}>
+          <div >
                                     <p  style={{fontSize: "30px",paddingLeft:'20px'}}>{selectedElement.text}</p>
 
 <Content>
@@ -290,7 +336,7 @@ const Infographic = () => {
         );
         case "معبد عين حرشا":
           return (
-            <div style={{marginTop:'100%'}}>
+            <div >
                <Content>
       <TempleContainer>
 
@@ -324,7 +370,7 @@ const Infographic = () => {
           <Element
             key={element.id}
             onClick={() => handleElementClick(element)}
-            isSelected={element === selectedElement}
+            isSelected={element.id === selectedElement.id}
           >
             <ElementImage src={element.image} alt={element.title} />
             <h1>{element.title}</h1>
@@ -332,7 +378,7 @@ const Infographic = () => {
           </Element>
         ))}
       </Carousel>
-      <ContentContainer>
+      <ContentContainer id="contentContainer">
         {selectedElement && renderContent()}
       </ContentContainer>
     </InfographicContainer>

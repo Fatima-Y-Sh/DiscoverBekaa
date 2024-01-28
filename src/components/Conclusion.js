@@ -14,6 +14,9 @@ const ConclusionContainer = styled.section`
   img{
     width:50%;
     height:auto;
+    @media screen and (max-width: 500px) {
+      width:100%;
+    }
   }
 `;
 

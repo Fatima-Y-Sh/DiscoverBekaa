@@ -9,11 +9,18 @@ const IntroductionContainer = styled.section`
   display: flex;
   flex-direction: row;
   align-items: center;
+  @media screen and (max-width: 500px) {
+    flex-direction: column;
+    padding:0;
+  }
 `;
 
 const IntroImage = styled.img`
   width: 30%; /* Adjust the width of the image */
   height: 500px;
+  @media screen and (max-width: 500px) {
+    width:100%;
+  }
 `;
 
 const TextContainer = styled.div`
@@ -22,6 +29,10 @@ const TextContainer = styled.div`
   padding-right:100px;
   //text-align: left; /* Align text to the left */
   text-align: justify; /* Align text to justify */
+  @media screen and (max-width: 500px) {
+    flex-direction: column;
+    padding:20px;
+  }
 
 `;
 const Separator = styled.hr`
