@@ -17,6 +17,15 @@ import r3 from '../images/r3.jpeg';
 import r4 from '../images/r4.jpeg';
 import ay1 from '../images/ay1.jpeg';
 import ay2 from '../images/ay2.jpeg';
+import ra1 from '../images/ra1.jpg';
+import ra2 from '../images/ra2.jpg';
+import ra3 from '../images/ra3.jpg';
+import ra4 from '../images/ra4.jpg';
+import qabvideo from '../images/qabvideo.mp4';
+import haidara from '../images/haidara.png';
+
+
+
 
 
 const InfographicContainer = styled.section`
@@ -171,6 +180,19 @@ const RachayaContainer = styled.div`
   }
 `;
 
+const Rachaya2Container = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+  padding-left:20%;
+  @media screen and (max-width: 500px) {
+    display:flex;
+    flex-direction: column;
+    align-items: center; /* Center images horizontally */
+    padding-left:0;
+  }
+`;
+
 const RachayaImageContainer = styled.div`
   position: relative;
 
@@ -210,6 +232,32 @@ const ContentContainer = styled.div`
 width: 100%;
 
 `;
+
+const VideoContainer = styled.div`
+  width: 100%;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+`;
+
+const MainVideo = styled.video`
+  width: 100%;
+  height:750px;
+`;
+
+const Description = styled.p`
+  font-size: 20px;
+  color: #333;
+  text-align: justify;
+  white-space: pre-line;
+  direction: rtl;
+  margin-left: 2%;
+  @media screen and (max-width: 500px) {
+    font-size:15px;
+  }
+`;
+
 
 
 const Infographic = () => {
@@ -263,6 +311,24 @@ const Infographic = () => {
           { src: ay1, caption: "قلعة الإستقلال اليوم "},
           { src: ay2, caption: "قلعة الإستقلال قبل  "}
         ],
+    },
+    {
+      id: 5,
+      title: "Rachaya",
+      image: ra1,
+      text: "",
+      caption:"",
+      images: [
+        { src: ra1, caption: ""},
+        { src: ra2, caption: ""},
+        { src: ra3, caption: ""},
+        { src: ra4, caption: ""}
+      ],
+    },
+    {
+      id: 6,
+      title: "Qabelias",
+      image: haidara,
     },
   ];
   const [selectedElement, setSelectedElement] = useState(elements[0]);
@@ -356,6 +422,33 @@ const Infographic = () => {
     </Content>
             </div>
           );
+          case "Rachaya":
+            return (
+              <div >    
+    <Content>
+          <Rachaya2Container>
+            {selectedElement.images.map((image, index) => (
+              <RachayaImageContainer key={index} >
+                <RachayaImage src={image.src} alt={`Image ${index + 1}`} />
+              </RachayaImageContainer>
+            ))}
+          </Rachaya2Container>
+        </Content>
+              </div>
+            );
+            case "Qabelias":
+              return (
+                <div>
+                  <VideoContainer>
+                    <MainVideo src={qabvideo} controls />
+                    <Description>
+                   <h3>معبد الشمس</h3>
+من آثار العهد الروماني، تنتصب في قب الياس منحوتة في صخرة شاهقة يطلق عليها اليوم إسم «حيدرة»، وكانت معبداً لإله الشمس، حيث زود الحجر بمرايا تعكس أشعة الشمس كل شروق. وتتألف المنحوتة من ثلاثة أبواب بينها فراغ ضيّق، كانت توضع فيها أصنام حجرية؛ وفي أسفلها مدرّج يعرف بإسم سهل المزينة، كان الأقدمون يرقبون منه بزوغ الشمس إبتهالاً بنورها العظيم.
+وفي دراسات تاريخية أخرى، يقال أن الإغريق، عندما قدموا الى المنطقة، حفروا في السفح الشرقي لجبل حيدرة معبداً للآلهة «مينموزينا»، وبنوا منازلهم أسفل سفح ذلك الجبل. والدليل على ذلك، هو العثور أثناء الحفر في المنطقة، على أوان قديمة وحلىً نسائية وطاسات وفخاريات تعود الى تلك الحقبة، وهي مما يستخدم في البيوت.
+                    </Description>
+                  </VideoContainer>
+                </div>
+              );
       default:
         return null;
     }
